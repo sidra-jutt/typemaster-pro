@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional typing speed test - Measure and improve your typing speed with accuracy tracking. Free online typing test with certificates.">
+    <meta name="keywords" content="typing test, typing speed, WPM, words per minute, typing practice, keyboard test">
+    <title>TypeMaster Pro - Professional Typing Speed Test | Free Online</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    
+    <!-- html2canvas for certificate download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-keyboard"></i>
+                <span class="brand-name">TypeMaster Pro</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#test" class="nav-link">Test</a>
+                <a href="#leaderboard" class="nav-link">Leaderboard</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#blog" class="nav-link">Blog</a>
+            </div>
+            <div class="nav-actions">
+                <div id="auth-buttons">
+                    <button id="login-btn" class="btn-outline">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <button id="signup-btn" class="btn-primary-nav">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </button>
+                </div>
+                <div id="user-menu" class="user-menu" style="display: none;">
+                    <button class="user-avatar" id="user-avatar-btn">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="user-name-display">User</span>
+                    </button>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <a href="#profile"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#history"><i class="fas fa-history"></i> My Tests</a>
+                        <a href="#settings"><i class="fas fa-cog"></i> Settings</a>
+                        <hr>
+                        <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <span class="brand-name">TypeMaster Pro</span>
+            <button class="mobile-menu-close" id="mobile-menu-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="#home" class="mobile-nav-link">Home</a>
+            <a href="#test" class="mobile-nav-link">Test</a>
+            <a href="#leaderboard" class="mobile-nav-link">Leaderboard</a>
+            <a href="#about" class="mobile-nav-link">About</a>
+            <a href="#blog" class="mobile-nav-link">Blog</a>
+            <hr>
+            <div id="mobile-auth-section">
+                <a href="#" id="mobile-login-btn" class="mobile-nav-link">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+                <a href="#" id="mobile-signup-btn" class="mobile-nav-link">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </a>
+            </div>
+            <div id="mobile-user-section" style="display: none;">
+                <a href="#profile" class="mobile-nav-link"><i class="fas fa-user"></i> Profile</a>
+                <a href="#history" class="mobile-nav-link"><i class="fas fa-history"></i> My Tests</a>
+                <a href="#" id="mobile-logout-btn" class="mobile-nav-link">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-star"></i> #1 Free Typing Test Platform
+            </div>
+            <h1 class="hero-title">Master Your Typing Speed</h1>
+            <p class="hero-subtitle">Professional typing speed test with real-time accuracy tracking and instant certificates</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="total-tests-count">0</div>
+                    <div class="stat-label">Tests Taken</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="total-users-count">0</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">Free</div>
+                    <div class="stat-label">Forever</div>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <button class="btn-cta" onclick="scrollToTest()">
+                    <i class="fas fa-rocket"></i> Start Free Test
+                </button>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-keys">
+                <div class="key">A</div>
+                <div class="key">S</div>
+                <div class="key">D</div>
+                <div class="key">F</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Container -->
+    <div class="container" id="test">
+        <header class="app-header">
+            <h2><i class="fas fa-keyboard"></i> Professional Typing Speed Test</h2>
+            <p class="subtitle">Measure and improve your typing speed with accuracy tracking</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Config Section -->
+            <section class="config-section" id="config-section">
+                <h3><i class="fas fa-cog"></i> Test Settings</h3>
+                <div class="config-grid">
+                    <div class="config-group">
+                        <label for="time-limit-select">Time Limit</label>
+                        <select id="time-limit-select">
+                            <option value="30">30 seconds</option>
+                            <option value="60" selected>1 minute</option>
+                            <option value="120">2 minutes</option>
+                            <option value="180">3 minutes</option>
+                        </select>
+                    </div>
+                    <div class="config-group">
+                        <label for="difficulty-select">Difficulty</label>
+                        <select id="difficulty-select">
+                            <option value="easy">Easy</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="hard">Hard</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </div>
+                    <div class="config-group">
+                        <label for="sound-toggle">
+                            <input type="checkbox" id="sound-toggle" checked>
+                            <span>Sound Effects</span>
+                        </label>
+                    </div>
+                </div>
+                <button id="start-test-btn" class="btn-primary">
+                    <i class="fas fa-play"></i> Start Test
+                </button>
+            </section>
+
+            <!-- Test Section -->
+            <section class="test-section" id="test-section" style="display: none;">
+                <div class="test-header">
+                    <div class="timer-container">
+                        <div class="timer-label">Time Remaining</div>
+                        <div class="timer" id="timer">1:00</div>
+                        <div class="time-progress">
+                            <div class="time-progress-fill" id="time-progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <div class="test-stats">
+                        <div class="stat-card">
+                            <div class="stat-label">WPM</div>
+                            <div class="stat-value" id="wpm">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Accuracy</div>
+                            <div class="stat-value" id="accuracy">100%</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Errors</div>
+                            <div class="stat-value" id="errors">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="test-content">
+                    <div class="statement-info">
+                        Sentence <span id="current-statement">1</span> of <span id="total-statements">5</span>
+                    </div>
+
+                    <div class="typing-container">
+                        <div class="typing-display" id="typing-display"></div>
+                        <textarea class="typing-input" id="typing-input"
+                            placeholder="Start typing here..." disabled rows="3"></textarea>
+                    </div>
+
+                    <div class="test-controls">
+                        <button id="pause-btn" class="btn-secondary">
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+                        <button id="end-test-btn" class="btn-danger">
+                            <i class="fas fa-stop"></i> End Test
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="results-section" style="display: none;">
+                <div class="certificate-section">
+                    <!-- Certificate Card for Download -->
+                    <div class="certificate-card" id="certificate-card">
+                        <div class="certificate-header">
+                            <div class="cert-seal">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <h2>Certificate of Achievement</h2>
+                            <h3>Professional Typing Speed Test</h3>
+                        </div>
+
+                        <div class="certificate-body">
+                            <p class="cert-text-preamble">This certifies that</p>
+                            <h4 class="cert-name" id="cert-name">Guest User</h4>
+                            <p class="cert-text-award">has demonstrated typing proficiency with</p>
+
+                            <div class="cert-metrics-grid">
+                                <div class="cert-metric">
+                                    <span class="metric-label">Words Per Minute</span>
+                                    <span class="metric-value" id="cert-wpm">0</span>
+                                </div>
+                                <div class="cert-metric">
+                                    <span class="metric-label">Accuracy</span>
+                                    <span class="metric-value" id="cert-accuracy">0%</span>
+                                </div>
+                                <div class="cert-metric">
+                                    <span class="metric-label">Level</span>
+                                    <span class="metric-value" id="cert-level">Beginner</span>
+                                </div>
+                                <div class="cert-metric">
+                                    <span class="metric-label">Duration</span>
+                                    <span class="metric-value" id="cert-duration">1:00</span>
+                                </div>
+                            </div>
+
+                            <p class="cert-date-issued">
+                                Issued on <span class="cert-date" id="cert-date"></span>
+                            </p>
+                        </div>
+
+                        <div class="certificate-footer">
+                            <p><i class="fas fa-certificate"></i> TypeMaster Pro</p>
+                        </div>
+                    </div>
+
+                    <div class="results-controls">
+                        <button id="download-cert-btn" class="btn-success">
+                            <i class="fas fa-download"></i> Download Certificate
+                        </button>
+                        <button id="share-btn" class="btn-info">
+                            <i class="fas fa-share-alt"></i> Share Results
+                        </button>
+                        <button id="restart-btn" class="btn-primary">
+                            <i class="fas fa-redo"></i> Take Another Test
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Leaderboard Section -->
+    <section class="leaderboard-section" id="leaderboard">
+        <div class="leaderboard-container">
+            <h2 class="section-title">Global Leaderboard</h2>
+            <p class="section-subtitle">Top performers from around the world</p>
+            <div class="leaderboard-table">
+                <div class="leaderboard-header">
+                    <span>Rank</span>
+                    <span>User</span>
+                    <span>WPM</span>
+                    <span>Accuracy</span>
+                </div>
+                <div id="leaderboard-content" class="leaderboard-content">
+                    <div class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin"></i> Loading...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <h2 class="section-title">About TypeMaster Pro</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Why Typing Speed Matters</h3>
+                    <p>In today's digital world, typing is an essential skill. Whether you're a student, professional, or content creator, improving your typing speed can save hours every week and boost your productivity significantly.</p>
+                    
+                    <h3>Our Mission</h3>
+                    <p>TypeMaster Pro was created to help people around the world improve their typing skills through engaging, accurate, and completely free testing. We believe that everyone deserves access to quality typing practice tools.</p>
+                    
+                    <h3>Features</h3>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Real-time WPM calculation</li>
+                        <li><i class="fas fa-check"></i> Accuracy tracking</li>
+                        <li><i class="fas fa-check"></i> Multiple difficulty levels</li>
+                        <li><i class="fas fa-check"></i> Instant certificates</li>
+                        <li><i class="fas fa-check"></i> Global leaderboard</li>
+                        <li><i class="fas fa-check"></i> Progress tracking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section" id="blog">
+        <div class="blog-container">
+            <h2 class="section-title">Typing Tips & Blog</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <div class="blog-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>10 Tips to Double Your Typing Speed</h3>
+                    <p>Learn proven techniques to dramatically improve your typing speed in just weeks.</p>
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> Feb 10, 2026</span>
+                        <span><i class="fas fa-clock"></i> 5 min read</span>
+                    </div>
+                </article>
+                
+                <article class="blog-card">
+                    <div class="blog-icon"><i class="fas fa-keyboard"></i></div>
+                    <h3>Touch Typing vs Hunt and Peck</h3>
+                    <p>Discover why touch typing is superior and how to make the transition.</p>
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> Feb 8, 2026</span>
+                        <span><i class="fas fa-clock"></i> 4 min read</span>
+                    </div>
+                </article>
+                
+                <article class="blog-card">
+                    <div class="blog-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Understanding WPM and Accuracy</h3>
+                    <p>What do these metrics mean and how to interpret your results effectively.</p>
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> Feb 5, 2026</span>
+                        <span><i class="fas fa-clock"></i> 3 min read</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4><i class="fas fa-keyboard"></i> TypeMaster Pro</h4>
+                <p>The world's most trusted typing speed test platform. Improve your skills, track your progress.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#test">Test</a></li>
+                    <li><a href="#leaderboard">Leaderboard</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#support">Support</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                    <li><a href="#cookies">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TypeMaster Pro. All rights reserved. Made with <i class="fas fa-heart"></i> by typing enthusiasts</p>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" id="modal-close">&times;</span>
+            
+            <!-- Login Form -->
+            <div id="login-form-container" class="auth-form-container">
+                <h2><i class="fas fa-sign-in-alt"></i> Welcome Back</h2>
+                <div id="login-error" class="error-message" style="display: none;"></div>
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+                <p class="auth-switch">Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form-container" class="auth-form-container" style="display: none;">
+                <h2><i class="fas fa-user-plus"></i> Create Account</h2>
+                <div id="signup-error" class="error-message" style="display: none;"></div>
+                <form id="signup-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" required placeholder="••••••••" minlength="6">
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </button>
+                </form>
+                <p class="auth-switch">Already have an account? <a href="#" id="show-login">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio -->
+    <audio id="type-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-fast-keyboard-typing-1384.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="error-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="complete-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
