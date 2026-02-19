@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sidra-jutt.github.io/typemaster-pro/sitemap.xml

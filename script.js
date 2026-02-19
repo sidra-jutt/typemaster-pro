@@ -804,12 +804,14 @@ function shareResults() {
     const accuracy = document.getElementById('cert-accuracy').textContent;
     const level = document.getElementById('cert-level').textContent;
     
-    const shareText = `I just scored ${wpm} WPM with ${accuracy} accuracy on TypeMaster Pro! 🎯\n\nPerformance Level: ${level}\n\nTry it yourself!`;
+    const shareURL = 'https://sidra-jutt.github.io/typemaster-pro/';
+    const shareText = `I just scored ${wpm} WPM with ${accuracy} accuracy on TypeMaster Pro! 🎯\n\nPerformance Level: ${level}\n\nTry it yourself: ${shareURL}`;
     
     if (navigator.share) {
         navigator.share({
             title: 'TypeMaster Pro - My Results',
-            text: shareText
+            text: shareText,
+            url: shareURL
         }).then(() => {
             showNotification('Results shared successfully!');
         }).catch(() => {
@@ -879,7 +881,7 @@ style.textContent = `
     font-size: 0.9rem;
 }
 .loading-spinner {
-    text-align: center;
+    text-align:center;
     padding: 40px;
     color: #999;
     font-size: 1.1rem;
@@ -889,3 +891,16 @@ document.head.appendChild(style);
 
 // Initialize
 document.addEventListener('DOMContentLoaded', init);
+
+// ✅ Visitor Counter (using compat API correctly)
+window.addEventListener('load', function() {
+    if (useFirebase && database) {
+        try {
+            database.ref('stats/totalVisits').transaction(function(currentVisits) {
+                return (currentVisits || 0) + 1;
+            });
+        } catch(e) {
+            console.log('Visitor counter error:', e);
+        }
+    }
+});

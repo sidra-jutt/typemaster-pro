@@ -3,30 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Professional typing speed test - Measure and improve your typing speed with accuracy tracking. Free online typing test with certificates.">
-    <meta name="keywords" content="typing test, typing speed, WPM, words per minute, typing practice, keyboard test">
-    <title>TypeMaster Pro - Professional Typing Speed Test | Free Online</title>
-    
+
+    <!-- PRIMARY SEO -->
+    <title>TypeMaster Pro – Free Typing Speed Test | Improve WPM Online</title>
+    <meta name="description" content="Test and improve your typing speed with TypeMaster Pro. Free online WPM test with real-time accuracy tracking, global leaderboard, 4 difficulty levels, and downloadable certificates. No signup needed!">
+    <meta name="keywords" content="typing master, typing speed test, WPM test, free typing test, typing practice online, improve typing speed, online typing master, keyboard speed test, touch typing, words per minute test, typing accuracy test">
+    <meta name="author" content="Sidra Jutt">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#2563eb">
+    <link rel="canonical" href="https://sidra-jutt.github.io/typemaster-pro/">
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TypeMaster Pro – Free Typing Speed Test">
+    <meta property="og:description" content="Test your typing speed and accuracy for free! Real-time WPM tracking, global leaderboard, 4 difficulty levels, and printable certificates.">
+    <meta property="og:url" content="https://sidra-jutt.github.io/typemaster-pro/">
+    <meta property="og:site_name" content="TypeMaster Pro">
+    <meta property="og:image" content="https://sidra-jutt.github.io/typemaster-pro/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TypeMaster Pro – Free Typing Speed Test">
+    <meta name="twitter:description" content="Test your WPM and accuracy for free! Global leaderboard, certificates, 4 difficulty levels. No signup needed.">
+    <meta name="twitter:image" content="https://sidra-jutt.github.io/typemaster-pro/og-image.png">
+
+    <!-- STRUCTURED DATA: WebApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "TypeMaster Pro",
+      "description": "Free online typing speed test. Check your WPM, accuracy, track progress on a global leaderboard, and download typing certificates.",
+      "url": "https://sidra-jutt.github.io/typemaster-pro/",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "offers": {"@type": "Offer","price": "0","priceCurrency": "USD"},
+      "creator": {"@type": "Person","name": "Sidra Jutt"},
+      "featureList": ["Real-time WPM calculation","Accuracy tracking","4 difficulty levels","Global leaderboard","Downloadable certificates","Mobile friendly"]
+    }
+    </script>
+
+    <!-- STRUCTURED DATA: FAQ (shows in Google search results!) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"What is a good typing speed in WPM?","acceptedAnswer":{"@type":"Answer","text":"An average typist types 40-50 WPM. A good speed is 60+ WPM. Professional typists reach 80-100+ WPM. TypeMaster Pro rates: Beginner (0-29), Intermediate (30-49), Advanced (50-79), Expert (80+)."}},
+        {"@type":"Question","name":"Is TypeMaster Pro free?","acceptedAnswer":{"@type":"Answer","text":"Yes, 100% free. Take unlimited typing tests, view the global leaderboard, and download certificates at no cost. No signup needed to start."}},
+        {"@type":"Question","name":"How is WPM calculated?","acceptedAnswer":{"@type":"Answer","text":"WPM is calculated by dividing correctly typed characters by 5 (average word length), divided by minutes elapsed. Only correct keystrokes count."}},
+        {"@type":"Question","name":"How can I improve my typing speed?","acceptedAnswer":{"@type":"Answer","text":"Practice 10-15 minutes daily, focus on accuracy before speed, use all 10 fingers (touch typing), never look at the keyboard, and gradually increase difficulty. Most users improve within 2 weeks."}},
+        {"@type":"Question","name":"Does TypeMaster Pro work on mobile?","acceptedAnswer":{"@type":"Answer","text":"Yes! TypeMaster Pro is fully responsive and works on smartphones, tablets, and desktops."}}
+      ]
+    }
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>">
-    
+
+    <!-- Performance: Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-    
+
     <!-- html2canvas for certificate download -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="main-nav">
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-brand">
                 <i class="fas fa-keyboard"></i>
@@ -37,6 +95,7 @@
                 <a href="#test" class="nav-link">Test</a>
                 <a href="#leaderboard" class="nav-link">Leaderboard</a>
                 <a href="#about" class="nav-link">About</a>
+                <a href="#faq" class="nav-link">FAQ</a>
                 <a href="#blog" class="nav-link">Blog</a>
             </div>
             <div class="nav-actions">
@@ -56,13 +115,12 @@
                     <div class="user-dropdown" id="user-dropdown">
                         <a href="#profile"><i class="fas fa-user"></i> Profile</a>
                         <a href="#history"><i class="fas fa-history"></i> My Tests</a>
-                        <a href="#settings"><i class="fas fa-cog"></i> Settings</a>
                         <hr>
                         <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     </div>
                 </div>
             </div>
-            <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Open menu">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
@@ -72,7 +130,7 @@
     <div class="mobile-menu" id="mobile-menu">
         <div class="mobile-menu-header">
             <span class="brand-name">TypeMaster Pro</span>
-            <button class="mobile-menu-close" id="mobile-menu-close">
+            <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -81,6 +139,7 @@
             <a href="#test" class="mobile-nav-link">Test</a>
             <a href="#leaderboard" class="mobile-nav-link">Leaderboard</a>
             <a href="#about" class="mobile-nav-link">About</a>
+            <a href="#faq" class="mobile-nav-link">FAQ</a>
             <a href="#blog" class="mobile-nav-link">Blog</a>
             <hr>
             <div id="mobile-auth-section">
@@ -107,8 +166,8 @@
             <div class="hero-badge">
                 <i class="fas fa-star"></i> #1 Free Typing Test Platform
             </div>
-            <h1 class="hero-title">Master Your Typing Speed</h1>
-            <p class="hero-subtitle">Professional typing speed test with real-time accuracy tracking and instant certificates</p>
+            <h1 class="hero-title">TypeMaster Pro — Free Online Typing Speed Test</h1>
+            <p class="hero-subtitle">Test and improve your typing speed with real-time WPM tracking, accuracy analysis, global leaderboard, and instant downloadable certificates. Start free — no signup needed!</p>
             <div class="hero-stats">
                 <div class="stat-item">
                     <div class="stat-number" id="total-tests-count">0</div>
@@ -124,8 +183,8 @@
                 </div>
             </div>
             <div class="hero-cta">
-                <button class="btn-cta" onclick="scrollToTest()">
-                    <i class="fas fa-rocket"></i> Start Free Test
+                <button class="btn-cta" onclick="scrollToTest()" aria-label="Start free typing test">
+                    <i class="fas fa-rocket"></i> Start Free Test — No Signup Needed
                 </button>
             </div>
         </div>
@@ -136,6 +195,18 @@
                 <div class="key">D</div>
                 <div class="key">F</div>
             </div>
+        </div>
+    </section>
+
+    <!-- Features Strip -->
+    <section class="features-strip" aria-label="Key features">
+        <div class="features-strip-inner">
+            <div class="feature-badge"><i class="fas fa-bolt"></i> Real-time WPM</div>
+            <div class="feature-badge"><i class="fas fa-bullseye"></i> Accuracy Tracking</div>
+            <div class="feature-badge"><i class="fas fa-layer-group"></i> 4 Difficulty Levels</div>
+            <div class="feature-badge"><i class="fas fa-trophy"></i> Global Leaderboard</div>
+            <div class="feature-badge"><i class="fas fa-certificate"></i> Free Certificates</div>
+            <div class="feature-badge"><i class="fas fa-mobile-alt"></i> Mobile Friendly</div>
         </div>
     </section>
 
@@ -191,7 +262,6 @@
                             <div class="time-progress-fill" id="time-progress-fill"></div>
                         </div>
                     </div>
-
                     <div class="test-stats">
                         <div class="stat-card">
                             <div class="stat-label">WPM</div>
@@ -207,18 +277,17 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="test-content">
                     <div class="statement-info">
                         Sentence <span id="current-statement">1</span> of <span id="total-statements">5</span>
                     </div>
-
                     <div class="typing-container">
                         <div class="typing-display" id="typing-display"></div>
                         <textarea class="typing-input" id="typing-input"
-                            placeholder="Start typing here..." disabled rows="3"></textarea>
+                            placeholder="Start typing here..." disabled rows="3"
+                            autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                            aria-label="Type the text shown above"></textarea>
                     </div>
-
                     <div class="test-controls">
                         <button id="pause-btn" class="btn-secondary">
                             <i class="fas fa-pause"></i> Pause
@@ -233,21 +302,16 @@
             <!-- Results Section -->
             <section class="results-section" id="results-section" style="display: none;">
                 <div class="certificate-section">
-                    <!-- Certificate Card for Download -->
                     <div class="certificate-card" id="certificate-card">
                         <div class="certificate-header">
-                            <div class="cert-seal">
-                                <i class="fas fa-award"></i>
-                            </div>
+                            <div class="cert-seal"><i class="fas fa-award"></i></div>
                             <h2>Certificate of Achievement</h2>
                             <h3>Professional Typing Speed Test</h3>
                         </div>
-
                         <div class="certificate-body">
                             <p class="cert-text-preamble">This certifies that</p>
                             <h4 class="cert-name" id="cert-name">Guest User</h4>
                             <p class="cert-text-award">has demonstrated typing proficiency with</p>
-
                             <div class="cert-metrics-grid">
                                 <div class="cert-metric">
                                     <span class="metric-label">Words Per Minute</span>
@@ -266,17 +330,14 @@
                                     <span class="metric-value" id="cert-duration">1:00</span>
                                 </div>
                             </div>
-
                             <p class="cert-date-issued">
                                 Issued on <span class="cert-date" id="cert-date"></span>
                             </p>
                         </div>
-
                         <div class="certificate-footer">
                             <p><i class="fas fa-certificate"></i> TypeMaster Pro</p>
                         </div>
                     </div>
-
                     <div class="results-controls">
                         <button id="download-cert-btn" class="btn-success">
                             <i class="fas fa-download"></i> Download Certificate
@@ -297,7 +358,7 @@
     <section class="leaderboard-section" id="leaderboard">
         <div class="leaderboard-container">
             <h2 class="section-title">Global Leaderboard</h2>
-            <p class="section-subtitle">Top performers from around the world</p>
+            <p class="section-subtitle">Top performers from around the world — sign up to compete!</p>
             <div class="leaderboard-table">
                 <div class="leaderboard-header">
                     <span>Rank</span>
@@ -321,21 +382,73 @@
             <div class="about-content">
                 <div class="about-text">
                     <h3>Why Typing Speed Matters</h3>
-                    <p>In today's digital world, typing is an essential skill. Whether you're a student, professional, or content creator, improving your typing speed can save hours every week and boost your productivity significantly.</p>
-                    
+                    <p>In today's digital world, typing is an essential skill. Whether you're a student, professional, or content creator, improving your typing speed can save hours every week and boost your productivity significantly. Studies show that increasing from 40 WPM to 70 WPM saves over 2 hours daily for heavy computer users.</p>
+
                     <h3>Our Mission</h3>
-                    <p>TypeMaster Pro was created to help people around the world improve their typing skills through engaging, accurate, and completely free testing. We believe that everyone deserves access to quality typing practice tools.</p>
-                    
-                    <h3>Features</h3>
+                    <p>TypeMaster Pro was created to help people around the world improve their typing skills through engaging, accurate, and completely free testing. We believe everyone deserves access to quality typing practice tools — without paywalls, ads, or limits.</p>
+
+                    <h3>Performance Levels</h3>
+                    <div class="levels-table">
+                        <div class="level-row"><span class="level-badge beginner">Beginner</span><span>0–29 WPM — Just starting out</span></div>
+                        <div class="level-row"><span class="level-badge intermediate">Intermediate</span><span>30–49 WPM — Getting there!</span></div>
+                        <div class="level-row"><span class="level-badge advanced">Advanced</span><span>50–79 WPM — Professional level</span></div>
+                        <div class="level-row"><span class="level-badge expert">Expert</span><span>80+ WPM — Master typist!</span></div>
+                    </div>
+
+                    <h3>Key Features</h3>
                     <ul class="features-list">
-                        <li><i class="fas fa-check"></i> Real-time WPM calculation</li>
-                        <li><i class="fas fa-check"></i> Accuracy tracking</li>
-                        <li><i class="fas fa-check"></i> Multiple difficulty levels</li>
-                        <li><i class="fas fa-check"></i> Instant certificates</li>
-                        <li><i class="fas fa-check"></i> Global leaderboard</li>
-                        <li><i class="fas fa-check"></i> Progress tracking</li>
+                        <li><i class="fas fa-check"></i> Real-time WPM calculation with live feedback</li>
+                        <li><i class="fas fa-check"></i> Accuracy and error tracking per keystroke</li>
+                        <li><i class="fas fa-check"></i> 4 difficulty levels: Easy, Medium, Hard, Expert</li>
+                        <li><i class="fas fa-check"></i> Downloadable PNG certificate of achievement</li>
+                        <li><i class="fas fa-check"></i> Global leaderboard powered by Firebase</li>
+                        <li><i class="fas fa-check"></i> Progress tracking across sessions</li>
+                        <li><i class="fas fa-check"></i> Fully responsive — works on any device</li>
+                        <li><i class="fas fa-check"></i> Pause and resume during a test</li>
                     </ul>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section — KEY for SEO -->
+    <section class="faq-section" id="faq">
+        <div class="faq-container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Everything you need to know about TypeMaster Pro and typing speed tests</p>
+            <div class="faq-grid">
+                <details class="faq-item" open>
+                    <summary>What is a good typing speed in WPM?</summary>
+                    <p>An average person types 40–50 WPM. A good professional speed is 60–70 WPM. Exceptional typists reach 80–100+ WPM. TypeMaster Pro rates you as: <strong>Beginner</strong> (0–29), <strong>Intermediate</strong> (30–49), <strong>Advanced</strong> (50–79), and <strong>Expert</strong> (80+).</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Is TypeMaster Pro completely free?</summary>
+                    <p>Yes, 100% free! Take unlimited typing tests, view the global leaderboard, and download certificates at no cost. You don't even need an account — just start typing right away.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How is WPM (Words Per Minute) calculated?</summary>
+                    <p>WPM is calculated by dividing correctly typed characters by 5 (average word length), then dividing by minutes elapsed. Only correct keystrokes count — errors do not contribute to your WPM. TypeMaster Pro updates this in real time as you type.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How can I improve my typing speed quickly?</summary>
+                    <p>The fastest way: (1) Practice 10–15 minutes daily, (2) Focus on accuracy before speed, (3) Use all 10 fingers — touch typing, (4) Never look at the keyboard, (5) Gradually increase difficulty. Most users see measurable improvement within 2 weeks!</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Does TypeMaster Pro work on mobile and tablets?</summary>
+                    <p>Yes! TypeMaster Pro is fully responsive and works beautifully on all devices — smartphones, tablets, and desktops. The layout automatically adjusts to any screen size. For best results on mobile, connect a Bluetooth keyboard.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How does the downloadable certificate work?</summary>
+                    <p>After completing a typing test, TypeMaster Pro generates a personalized Certificate of Achievement showing your name, WPM, accuracy, performance level, and date. Download it as a PNG image and share it on LinkedIn, WhatsApp, or print it out!</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What are the 4 difficulty levels?</summary>
+                    <p><strong>Easy:</strong> Simple everyday sentences. <strong>Medium:</strong> Technology and web-related text. <strong>Hard:</strong> Technical programming terminology. <strong>Expert:</strong> Advanced developer concepts. Each level challenges your vocabulary and accuracy differently.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Do I need to sign up to use the leaderboard?</summary>
+                    <p>You need a free account to appear on the global leaderboard and save results across devices. Without an account, results are saved locally in your browser. Signing up takes under 30 seconds with just an email and password!</p>
+                </details>
             </div>
         </div>
     </section>
@@ -343,32 +456,31 @@
     <!-- Blog Section -->
     <section class="blog-section" id="blog">
         <div class="blog-container">
-            <h2 class="section-title">Typing Tips & Blog</h2>
+            <h2 class="section-title">Typing Tips & Resources</h2>
+            <p class="section-subtitle">Expert advice to help you type faster and more accurately</p>
             <div class="blog-grid">
                 <article class="blog-card">
                     <div class="blog-icon"><i class="fas fa-lightbulb"></i></div>
                     <h3>10 Tips to Double Your Typing Speed</h3>
-                    <p>Learn proven techniques to dramatically improve your typing speed in just weeks.</p>
+                    <p>Learn proven techniques to dramatically improve your typing speed in just weeks of consistent daily practice.</p>
                     <div class="blog-meta">
                         <span><i class="fas fa-calendar"></i> Feb 10, 2026</span>
                         <span><i class="fas fa-clock"></i> 5 min read</span>
                     </div>
                 </article>
-                
                 <article class="blog-card">
                     <div class="blog-icon"><i class="fas fa-keyboard"></i></div>
                     <h3>Touch Typing vs Hunt and Peck</h3>
-                    <p>Discover why touch typing is superior and how to make the transition.</p>
+                    <p>Discover why touch typing is superior and how to make the switch without losing productivity during the transition.</p>
                     <div class="blog-meta">
                         <span><i class="fas fa-calendar"></i> Feb 8, 2026</span>
                         <span><i class="fas fa-clock"></i> 4 min read</span>
                     </div>
                 </article>
-                
                 <article class="blog-card">
                     <div class="blog-icon"><i class="fas fa-chart-line"></i></div>
                     <h3>Understanding WPM and Accuracy</h3>
-                    <p>What do these metrics mean and how to interpret your results effectively.</p>
+                    <p>What do these metrics really mean, how they're calculated, and how to interpret your results to set smart goals.</p>
                     <div class="blog-meta">
                         <span><i class="fas fa-calendar"></i> Feb 5, 2026</span>
                         <span><i class="fas fa-clock"></i> 3 min read</span>
@@ -383,19 +495,19 @@
         <div class="footer-container">
             <div class="footer-section">
                 <h4><i class="fas fa-keyboard"></i> TypeMaster Pro</h4>
-                <p>The world's most trusted typing speed test platform. Improve your skills, track your progress.</p>
+                <p>The free online typing speed test platform. Improve your skills, track your progress, and compete globally.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/sidra-jutt/typemaster-pro" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
             <div class="footer-section">
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#test">Test</a></li>
+                    <li><a href="#test">Start Test</a></li>
                     <li><a href="#leaderboard">Leaderboard</a></li>
                     <li><a href="#about">About</a></li>
                 </ul>
@@ -403,10 +515,9 @@
             <div class="footer-section">
                 <h4>Resources</h4>
                 <ul>
-                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#blog">Typing Tips</a></li>
                     <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#support">Support</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="https://github.com/sidra-jutt/typemaster-pro" target="_blank" rel="noopener">GitHub</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -414,59 +525,58 @@
                 <ul>
                     <li><a href="#privacy">Privacy Policy</a></li>
                     <li><a href="#terms">Terms of Service</a></li>
-                    <li><a href="#cookies">Cookies</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 TypeMaster Pro. All rights reserved. Made with <i class="fas fa-heart"></i> by typing enthusiasts</p>
+            <p>&copy; 2026 TypeMaster Pro. All rights reserved. Made with <i class="fas fa-heart"></i> by <a href="https://github.com/sidra-jutt" target="_blank" rel="noopener">Sidra Jutt</a></p>
         </div>
     </footer>
 
     <!-- Auth Modal -->
-    <div id="auth-modal" class="modal">
+    <div id="auth-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
         <div class="modal-content">
-            <span class="modal-close" id="modal-close">&times;</span>
-            
+            <span class="modal-close" id="modal-close" tabindex="0" role="button" aria-label="Close">&times;</span>
+
             <!-- Login Form -->
             <div id="login-form-container" class="auth-form-container">
-                <h2><i class="fas fa-sign-in-alt"></i> Welcome Back</h2>
-                <div id="login-error" class="error-message" style="display: none;"></div>
-                <form id="login-form" class="auth-form">
+                <h2 id="auth-modal-title"><i class="fas fa-sign-in-alt"></i> Welcome Back</h2>
+                <div id="login-error" class="error-message" style="display: none;" role="alert"></div>
+                <form id="login-form" class="auth-form" novalidate>
                     <div class="form-group">
                         <label for="login-email">Email</label>
-                        <input type="email" id="login-email" required placeholder="your@email.com">
+                        <input type="email" id="login-email" required placeholder="your@email.com" autocomplete="email">
                     </div>
                     <div class="form-group">
                         <label for="login-password">Password</label>
-                        <input type="password" id="login-password" required placeholder="••••••••">
+                        <input type="password" id="login-password" required placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" autocomplete="current-password">
                     </div>
                     <button type="submit" class="btn-primary">
                         <i class="fas fa-sign-in-alt"></i> Login
                     </button>
                 </form>
-                <p class="auth-switch">Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
+                <p class="auth-switch">Don't have an account? <a href="#" id="show-signup">Sign up free</a></p>
             </div>
 
             <!-- Signup Form -->
             <div id="signup-form-container" class="auth-form-container" style="display: none;">
-                <h2><i class="fas fa-user-plus"></i> Create Account</h2>
-                <div id="signup-error" class="error-message" style="display: none;"></div>
-                <form id="signup-form" class="auth-form">
+                <h2><i class="fas fa-user-plus"></i> Create Free Account</h2>
+                <div id="signup-error" class="error-message" style="display: none;" role="alert"></div>
+                <form id="signup-form" class="auth-form" novalidate>
                     <div class="form-group">
                         <label for="signup-name">Full Name</label>
-                        <input type="text" id="signup-name" required placeholder="John Doe">
+                        <input type="text" id="signup-name" required placeholder="John Doe" autocomplete="name">
                     </div>
                     <div class="form-group">
                         <label for="signup-email">Email</label>
-                        <input type="email" id="signup-email" required placeholder="your@email.com">
+                        <input type="email" id="signup-email" required placeholder="your@email.com" autocomplete="email">
                     </div>
                     <div class="form-group">
                         <label for="signup-password">Password</label>
-                        <input type="password" id="signup-password" required placeholder="••••••••" minlength="6">
+                        <input type="password" id="signup-password" required placeholder="Min. 6 characters" minlength="6" autocomplete="new-password">
                     </div>
                     <button type="submit" class="btn-primary">
-                        <i class="fas fa-user-plus"></i> Sign Up
+                        <i class="fas fa-user-plus"></i> Create Free Account
                     </button>
                 </form>
                 <p class="auth-switch">Already have an account? <a href="#" id="show-login">Login</a></p>
